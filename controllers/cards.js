@@ -4,7 +4,6 @@ const List = require('../models/list');
 const addCard = async (req, res) => {
     try {
         const list = await List.findById(req.body.listId);
-        console.log(list);
         if (!list) {
             console.log('List not found with id:', req.body.listId);
             return res.status(404).json({ message: 'List not found' });
@@ -22,7 +21,6 @@ const addCard = async (req, res) => {
         }
 
         list.cards.push(card);
-        console.log(list);
         await list.save();
         res.status(201).json(card);
     } catch (err) {

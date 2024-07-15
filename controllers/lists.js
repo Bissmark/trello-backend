@@ -7,7 +7,6 @@ const index = async (req, res) => {
         .populate('board')
         .populate('cards')
         .sort({createdAt: 'desc'});
-        console.log(lists);
         res.status(200).json(lists);
     } catch(err) {
         console.log(err);
