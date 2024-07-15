@@ -5,7 +5,6 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const session = require('express-session');
 const cors = require('cors');
-// const mongoStore = require('connect-mongo');
 const passport = require('passport');
 
 require('dotenv').config();
@@ -13,15 +12,16 @@ require('./config/database');
 require('./config/passport');
 
 const app = express();
-app.use(cors());
+const corsOpts = {
+    origin: '*',
+    credentials: true
+};
+app.use(cors(corsOpts));
 
 app.use(session({
     secret: process.env.SECRET,
     resave: false,
-    saveUninitialized: true,
-    // store: mongoStore.create({ 
-    //     mongoUrl: process.env.DATABASE_URL 
-    // })
+    saveUninitialized: true
 }));
 
 app.use(passport.initialize());
