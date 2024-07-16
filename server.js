@@ -14,7 +14,6 @@ mongoose.connection.on('connected', () => {
 app.use(cors());
 app.use(express.json());
 
-//app.use('/', require('./routes/index'));
 app.use('/users', require('./routes/users'));
 app.use('/lists', require('./routes/lists'));
 app.use('/cards', require('./routes/cards'));
