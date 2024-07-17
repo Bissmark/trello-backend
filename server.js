@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const mongoose = require('mongoose');
+const logger = require('morgan');
 
 require('dotenv').config();
 
@@ -12,6 +13,7 @@ mongoose.connection.on('connected', () => {
 });
 
 app.use(cors());
+app.use(logger('dev'));
 app.use(express.json());
 
 app.use('/users', require('./routes/users'));
