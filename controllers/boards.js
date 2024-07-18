@@ -15,7 +15,9 @@ const show = async (req, res) => {
         const board = await Board.findById(req.params.id)
                                 .populate({
                                     path: 'lists',
-                                    populate: { path: 'cards' }
+                                    populate: { 
+                                        path: 'cards' 
+                                    }
                                 }).populate('user');
         res.status(200).json(board);
     } catch(err) {

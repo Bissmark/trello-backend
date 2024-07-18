@@ -13,6 +13,7 @@ const signup = async (req, res) => {
         }
         // Create a new user with hashed password
         const user = await User.create({
+            name: req.body.name,
             email: req.body.email,
             password: bcrypt.hashSync(req.body.password, SALT_LENGTH)
         })
@@ -28,8 +29,8 @@ const login = async (req, res) => {
     try {
 		const user = await User.findOne({ email: req.body.email });
 		if (user && bcrypt.compareSync(req.body.password, user.password)) {
-			const token = jwt.sign({ email: user.email, _id: user._id }, process.env.SECRET);
-			res.status(200).json({ token });
+			const token = jwt.sign({ name: user.name, email: user.email, _id: user._id }, process.env.SECRET);
+			res.status(200).json({ name: user.name, token });
 		} else {
 			res.status(401).json({ error: 'Invalid email or password.' });
 		}
