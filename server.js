@@ -16,6 +16,14 @@ app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 
+app.get('/', (req, res) => {
+    res.json({ 
+        message: 'Trello Backend API is running!', 
+        timestamp: new Date().toISOString(),
+        env: process.env.NODE_ENV || 'development'
+    });
+});
+
 app.use('/users', require('./routes/users'));
 app.use('/lists', require('./routes/lists'));
 app.use('/cards', require('./routes/cards'));
