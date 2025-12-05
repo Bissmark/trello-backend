@@ -8,5 +8,6 @@ router.use(checkToken);
 router.get('/', listsController.index);
 router.post('/', listsController.create);
 router.delete('/:id', listsController.delete);
+router.put('/:id', listsController.update);
 
 module.exports = router;

@@ -6,7 +6,7 @@ const cardSchema = new Schema({
     description: String,
     priority: {
         type: String,
-        enum: ['High', 'Medium', 'Low']
+        enum: ['High', 'Medium', 'Low', '']
     },
 }, {
     timestamps: true

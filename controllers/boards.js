@@ -12,13 +12,12 @@ const index = async (req, res) => {
 
 const show = async (req, res) => {
     try {
-        const board = await Board.findById(req.params.id)
-                                .populate({
-                                    path: 'lists',
-                                    populate: { 
-                                        path: 'cards' 
-                                    }
-                                }).populate('user');
+        const board = await Board.findById(req.params.id).populate({
+            path: 'lists',
+            populate: { 
+                path: 'cards' 
+            }
+        }).populate('user');
         res.status(200).json(board);
     } catch(err) {
         res.status(400).json(err);
@@ -43,9 +42,20 @@ const deleteBoard = async (req, res) => {
     }
 }
 
+const update = async (req, res) => {
+    try {
+        const board = await Board.findByIdAndUpdate(req.params.id, req.body);
+        res.status(200).json(board);
+    }
+    catch(err) {
+        res.status(400).json(err);
+    }
+}
+
 module.exports = {
     create,
     index,
     show,
-    delete: deleteBoard
+    delete: deleteBoard,
+    update
 };
